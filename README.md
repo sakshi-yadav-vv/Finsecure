@@ -30,14 +30,49 @@ It provides a secure user authentication system and an interactive dashboard whe
 - Protected API endpoints.
 - User-specific transaction history.
 
+
 ### 2. Rule-Based Fraud Detection
-- Evaluates transactions using predefined risk conditions.
-- Considers transaction amount and location.
-- Generates a risk score.
-- Classifies transactions into:
-  - ALLOW
-  - VERIFY
-  - BLOCK
+
+FinSecure uses predefined rules to identify suspicious
+financial transactions.
+
+The rule-based engine evaluates:
+
+- Transaction amount.
+- Transaction location.
+- Sender balance consistency for TRANSFER and CASH_OUT transactions.
+
+**Transaction Amount Analysis:**
+
+Higher transaction amounts contribute to higher risk scores.
+
+**Location Analysis:**
+
+Transactions from locations outside the configured list
+receive an additional risk score.
+
+**Balance Consistency Analysis:**
+
+For supported transaction types, the system checks whether
+the sender's balance change is consistent with the
+transaction amount.
+
+Unexpected balance differences can increase the risk score.
+
+**Risk Classification:**
+
+| Risk Score | Decision |
+|---|---|
+| 0–29 | ALLOW |
+| 30–69 | VERIFY |
+| 70–100 | BLOCK |
+
+The system also returns risk indicators explaining
+which rules contributed to the decision.
+
+Rule-based decisions and machine learning predictions
+are displayed separately.
+
 
 ### 3. Machine Learning Fraud Detection
 - Uses a trained Random Forest classification model.
@@ -128,9 +163,67 @@ It provides a secure user authentication system and an interactive dashboard whe
 
 FinSecure uses a Random Forest classifier for financial fraud detection.
 
+
+## Machine Learning Evaluation
+
+FinSecure includes an experimental Random Forest model evaluated
+using the PaySim financial transaction dataset.
+
+### Dataset Information
+
+- Total original transactions: 6,362,620
+- Training transactions: 106,570
+- Testing transactions: 1,272,524
+- Fraud percentage in test data: 0.1291%
+
+The experimental evaluation uses a stratified train/test split
+performed before sampling the training data.
+
+### Evaluation Results
+
+| Metric | Result |
+|---|---|
+| Fraud Precision | 0.93 |
+| Fraud Recall | 1.00 (rounded) |
+| Fraud F1-Score | 0.96 |
+| ROC-AUC | 0.999562 |
+| Average Precision (PR-AUC) | 0.998706 |
+| True Positives | 1,640 |
+| True Negatives | 1,270,765 |
+| False Positives | 116 |
+| False Negatives | 3 |
+
+### Model Features
+
+The Random Forest model uses 10 features:
+
+1. Transaction type
+2. Transaction amount
+3. Sender's old balance
+4. Sender's new balance
+5. Receiver's old balance
+6. Receiver's new balance
+7. Sender balance change
+8. Receiver balance change
+9. Sender balance error
+10. Receiver balance error
+
+### Evaluation Notes
+
+- The evaluation uses simulated PaySim transactions.
+- The test set retains the original dataset's fraud proportion.
+- The results do not establish performance on real-world banking data.
+- Model probabilities have not been independently calibrated.
+- The experimental model is stored separately from the working model.
+
+Detailed evaluation results are available in
+`reports/model_evaluation.txt`.
+
+
 **Dataset:** PaySim Financial Transaction Dataset.
 
 The dataset contains simulated financial transactions with fraud labels.
+
 
 **Machine Learning Workflow:**
 
@@ -154,6 +247,7 @@ FinSecure/
 │
 ├── backend/
 │   ├── auth.py
+|   |- compare_models.py
 │   ├── main.py
 │   ├── models.py
 │   └── train_model.py
@@ -173,6 +267,8 @@ FinSecure/
 │
 ├── models/
 │   └── finsecure_fraud_model.joblib
+|   reports/
+    model_evaluation.txt
 │
 ├── database.py
 ├── package.json
