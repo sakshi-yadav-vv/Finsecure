@@ -1,0 +1,260 @@
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f7f9fc;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+.auth-brand {
+  background: linear-gradient(145deg, #071426, #102b43);
+  color: white;
+  padding: 55px 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.auth-logo span {
+  font-size: 35px;
+}
+
+.auth-logo h1 {
+  font-size: 27px;
+  margin: 0;
+}
+
+.brand-content {
+  max-width: 520px;
+}
+
+.brand-tag,
+.welcome-label {
+  color: #14c9b3;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.brand-content h2 {
+  font-size: clamp(38px, 4.5vw, 58px);
+  line-height: 1.2;
+  margin: 22px 0;
+}
+
+.brand-content h2 span {
+  color: #14c9b3;
+}
+
+.brand-description {
+  color: #b5c6d6;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.brand-footer {
+  color: #8fa6ba;
+  font-size: 13px;
+}
+
+.auth-form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 30px;
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.mobile-logo {
+  display: none;
+}
+
+.auth-form-container h2 {
+  color: #10243a;
+  font-size: 30px;
+  margin: 12px 0;
+}
+
+.auth-subtitle {
+  color: #788797;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.auth-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form-container label {
+  color: #24384d;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 17px 0 9px;
+}
+
+.auth-form-container input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #dce4ec;
+  border-radius: 9px;
+  background: white;
+  color: #10243a;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-form-container input:focus {
+  border-color: #12bda9;
+  box-shadow: 0 0 0 3px rgba(18, 189, 169, 0.1);
+}
+
+.auth-form-container button {
+  margin-top: 27px;
+  padding: 16px;
+  border: none;
+  border-radius: 9px;
+  background: #0caa9b;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-form-container button:hover {
+  background: #078c80;
+}
+
+.auth-form-container button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-message {
+  color: #b42318;
+  background: #fff0ee;
+  padding: 11px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.auth-switch {
+  color: #788797;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 25px;
+}
+
+.auth-switch span {
+  color: #079d90;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.auth-security {
+  color: #8a98a7;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 55px;
+}
+
+@media (max-width: 750px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand {
+    display: none;
+  }
+
+  .auth-form-section {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 30px 22px;
+  }
+
+  .mobile-logo {
+    display: block;
+    color: #0caa9b;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 55px;
+  }
+
+  .auth-form-container h2 {
+    font-size: 26px;
+  }
+}
+
+
+
+
+
+/* Password field layout */
+.auth-form-container form .password-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #dce4ec;
+  border-radius: 9px;
+  background: white;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.auth-form-container form .password-container:focus-within {
+  border-color: #12bda9;
+  box-shadow: 0 0 0 3px rgba(18, 189, 169, 0.1);
+}
+
+.auth-form-container form .password-container input {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.auth-form-container form .password-container input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.auth-form-container form .password-container button.password-toggle {
+  width: 44px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.auth-form-container form .password-container button.password-toggle:hover {
+  background: #f1f5f9;
+  color: #0caa9b;
+}
