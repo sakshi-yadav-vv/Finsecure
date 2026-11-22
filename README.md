@@ -4,7 +4,7 @@
   <strong>Intelligent Financial Transaction Monitoring and Fraud Detection</strong>
 </p>
 
-## 📌 Project Overview
+##  Project Overview
 
 FinSecure is an AI and Machine Learning based financial fraud detection system designed to identify potentially fraudulent transactions and help improve transaction security.
 
@@ -12,7 +12,7 @@ The system combines **Rule-Based Fraud Detection** and **Machine Learning Classi
 
 It provides a secure user authentication system and an interactive dashboard where users can analyze transactions, monitor fraud statistics, view transaction history, and download reports.
 
-## 🎯 Objectives
+##  Objectives
 
 - Detect suspicious and potentially fraudulent financial transactions.
 - Combine rule-based analysis with machine learning predictions.
@@ -21,7 +21,7 @@ It provides a secure user authentication system and an interactive dashboard whe
 - Display transaction statistics through an interactive dashboard.
 - Maintain user-specific transaction records.
 
-## ✨ Key Features
+##  Key Features
 
 ### 1. User Authentication
 - User registration and login.
@@ -66,7 +66,7 @@ It provides a secure user authentication system and an interactive dashboard whe
 - Secure password storage.
 - Environment-based JWT secret configuration.
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Category | Technologies |
 |---|---|
@@ -80,7 +80,7 @@ It provides a secure user authentication system and an interactive dashboard whe
 | API Testing | FastAPI Swagger UI |
 | Version Control | Git, GitHub |
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```text
               USER
@@ -113,7 +113,7 @@ It provides a secure user authentication system and an interactive dashboard whe
        REPORT GENERATION
 ```
 
-## 🔄 How the System Works
+## How the System Works
 
 1. The user registers or logs into FinSecure.
 2. The user enters transaction details.
@@ -124,7 +124,7 @@ It provides a secure user authentication system and an interactive dashboard whe
 7. The transaction is stored with its associated user account.
 8. The dashboard displays the analysis and transaction statistics.
 
-## 🤖 Machine Learning Model
+## Machine Learning Model
 
 FinSecure uses a Random Forest classifier for financial fraud detection.
 
@@ -147,7 +147,7 @@ The dataset contains simulated financial transactions with fraud labels.
 
 The model's predictions are experimental and should not be treated as verified real-world fraud decisions.
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 FinSecure/
@@ -180,7 +180,7 @@ FinSecure/
 └── .gitignore
 ```
 
-## ⚙️ Installation and Setup
+## Installation and Setup
 
 ### Prerequisites
 
@@ -259,7 +259,7 @@ Open the frontend URL displayed in the terminal, usually:
 
 `http://localhost:5173`
 
-## 📊 Model and Dataset
+## Model and Dataset
 
 The project uses the PaySim dataset for model training.
 
@@ -281,7 +281,7 @@ python backend/train_model.py
 
 The trained model should be saved in the `models/` directory.
 
-## 🔐 Security Considerations
+## Security Considerations
 
 - Passwords are stored as Argon2 hashes.
 - JWT tokens are used for authentication.
@@ -290,7 +290,7 @@ The trained model should be saved in the `models/` directory.
 - Secret keys are configured through environment variables.
 - Database files and sensitive configuration files are excluded from version control.
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 - Integration with real-time financial transaction systems.
 - Advanced anomaly detection techniques.
@@ -300,7 +300,7 @@ The trained model should be saved in the `models/` directory.
 - Deployment on a cloud platform.
 - Improved explainability of machine learning predictions.
 
-## 👩‍💻 Developer
+## Developer
 
 **Sakshi Yadav**
 
@@ -308,7 +308,7 @@ Computer Science and Engineering
 
 GitHub: [sakshi-yadav-vv](https://github.com/sakshi-yadav-vv)
 
-## 📜 Disclaimer
+## Disclaimer
 
 FinSecure is an academic project developed for educational and demonstration purposes. It uses simulated financial transaction data and should not be used as a production banking fraud prevention system without further testing, validation, security reviews and regulatory compliance.
 
