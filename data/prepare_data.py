@@ -27,6 +27,24 @@ ml_data = ml_data.sample(
     random_state=42
 ).reset_index(drop=True)
 
+
+# Advanced fraud detection features
+
+ml_data["sender_balance_change"] = (
+    ml_data["oldbalanceOrg"] - ml_data["newbalanceOrig"]
+)
+
+ml_data["receiver_balance_change"] = (
+    ml_data["newbalanceDest"] - ml_data["oldbalanceDest"]
+)
+
+ml_data["sender_balance_error"] = (
+    ml_data["amount"] - ml_data["sender_balance_change"]
+)
+
+ml_data["receiver_balance_error"] = (
+    ml_data["amount"] - ml_data["receiver_balance_change"]
+)
 # Keep useful features and target
 features = [
     "type",
@@ -34,7 +52,11 @@ features = [
     "oldbalanceOrg",
     "newbalanceOrig",
     "oldbalanceDest",
-    "newbalanceDest"
+    "newbalanceDest",
+    "sender_balance_change",
+    "receiver_balance_change",
+    "sender_balance_error",
+    "receiver_balance_error"
 ]
 
 ml_data = ml_data[features + ["isFraud"]]

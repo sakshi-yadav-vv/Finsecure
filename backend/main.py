@@ -45,7 +45,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-)  
+)
 
 Base.metadata.create_all(bind=engine)
 def get_db():
@@ -54,7 +54,7 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
 security = HTTPBearer()
 
 
@@ -80,7 +80,7 @@ def get_current_user(
             detail="User not found",
         )
 
-    return user        
+    return user
 
 # API Endpoints
 @app.get("/")
@@ -99,7 +99,7 @@ def check_transaction():
         "receiver": "User456",
         "amount": 5000,
         "status": "Received for analysis"
-        
+
     }
 
 
@@ -136,6 +136,7 @@ def analyze_transaction(
     current_user: models.User = Depends(get_current_user),
 ):
     # Existing rule-based detection
+        # Existing rule-based detection
     risk_score = 0
     risk_factors = []
 
@@ -165,15 +166,64 @@ def analyze_transaction(
 
     risk_score = min(risk_score, 100)
 
-    # ML fraud detection
+
+
+    # Detect sender balance inconsistency
+    # Apply only to transfer and cash-out transactions
+    if transaction.type.upper() in ["TRANSFER", "CASH_OUT"]:
+        sender_balance_change = (
+            transaction.oldbalanceOrg - transaction.newbalanceOrig
+        )
+
+        balance_difference = abs(
+            transaction.amount - sender_balance_change
+        )
+
+        # Check only when the sender has sufficient recorded balance
+        if (
+            transaction.oldbalanceOrg >= transaction.amount
+            and balance_difference > 1.0
+        ):
+            risk_score += 25
+            risk_factors.append(
+                "Sender balance does not match transaction amount"
+            )
+
+
+
+
+    # Calculate advanced fraud detection features
+    sender_balance_change = (
+        transaction.oldbalanceOrg - transaction.newbalanceOrig
+    )
+
+    receiver_balance_change = (
+        transaction.newbalanceDest - transaction.oldbalanceDest
+    )
+
+    sender_balance_error = (
+        transaction.amount - sender_balance_change
+    )
+
+    receiver_balance_error = (
+        transaction.amount - receiver_balance_change
+    )
+
+    # Prepare ML input
     ml_input = pd.DataFrame([{
         "type": transaction.type,
         "amount": transaction.amount,
         "oldbalanceOrg": transaction.oldbalanceOrg,
         "newbalanceOrig": transaction.newbalanceOrig,
         "oldbalanceDest": transaction.oldbalanceDest,
-        "newbalanceDest": transaction.newbalanceDest
+        "newbalanceDest": transaction.newbalanceDest,
+        "sender_balance_change": sender_balance_change,
+        "receiver_balance_change": receiver_balance_change,
+        "sender_balance_error": sender_balance_error,
+        "receiver_balance_error": receiver_balance_error
     }])
+
+
 
     ml_prediction_value = int(ml_model.predict(ml_input)[0])
     ml_probability = float(
@@ -209,7 +259,7 @@ def analyze_transaction(
         ml_fraud_probability=round(ml_probability * 100, 2),
         user_id=current_user.id
    )
-        
+
 
         db.add(record)
         db.commit()
@@ -438,6 +488,3 @@ def get_current_user(
 
     finally:
         db.close()
-
-
- 

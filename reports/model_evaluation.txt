@@ -1,0 +1,28 @@
+﻿FinSecure Experimental Model Evaluation
+=======================================
+
+Dataset: PaySim
+Training transactions: 106570
+Testing transactions: 1272524
+Test fraud percentage: 0.1291%
+
+Fraud Precision: 0.93
+Fraud Recall: 1.00
+Fraud F1-Score: 0.96
+
+Confusion Matrix:
+[[1270765, 116],
+ [3, 1640]]
+
+ROC-AUC: 0.9995619737447621
+Average Precision: 0.9987064229114911
+
+True Positives: 1640
+False Positives: 116
+False Negatives: 3
+True Negatives: 1270765
+
+Note:
+The test dataset preserves the original PaySim fraud proportion.
+Results are based on simulated transactions and a random
+train/test split, not independent real-world banking data.
